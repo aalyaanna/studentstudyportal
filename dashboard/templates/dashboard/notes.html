@@ -35,15 +35,22 @@
     
         <div class="container">
             <table class="table">
-                {% for note in notes %}
                 <thead>
-                  <tr>
-                    <th scope="col">{{note.title}}</th>
-                    <th scope="col">{{note.description|slice:"0:100"}}</th>
-                    <th scope="col"><a class="link-secondary" href="{% url 'delete-note' note.id %}">
-                        <i class="bi bi-trash-fill"></i></a></th>
-                  </tr>
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Delete</th>
+                    </tr>
                 </thead>
+                {% for note in notes %}
+                <tbody>
+                  <tr>
+                    <td scope="col">{{note.title}}</td>
+                    <td scope="col">{{note.description|slice:"0:100"}}</td>
+                    <td scope="col"><a class="link-secondary" href="{% url 'delete-note' note.id %}">
+                        <i class="bi bi-trash-fill"></i></a></td>
+                  </tr>
+                </tbody>
                 {% endfor %}
               </table>
         </div>

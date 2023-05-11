@@ -6,6 +6,7 @@ from . forms import *
 from django.contrib import messages
 from django.views import generic
 import requests
+import wikipedia
 
 # Create your views here.
 def homepage(request):
@@ -166,15 +167,15 @@ def dictionary(request):
     if request.method == "POST":
         form = DashboardForm(request.POST)
         text = request.POST['text']
-        url = "https://api.dictionaryapi.dev/api/v2/entries/en_US"+text
+        url = "https://api.dictionaryapi.dev/api/v2/entries/en_US/"+text
         r = requests.get(url)
         answer = r.json()
         try:
             phonetics = answer[0]['phonetics'][0]['text']
             audio = answer[0]['phonetics'][0]['audio']
-            definition = answer[0]['meanings'][0]['definition'][0]['definition']
-            example = answer[0]['meanings'][0]['definition'][0]['example']
-            synonyms = answer[0]['meanings'][0]['definition'][0]['synonyms']
+            definition = answer[0]['meanings'][0]['definitions'][0]['definition']
+            example = answer[0]['meanings'][0]['definitions'][0]['example']
+            synonyms = answer[0]['meanings'][0]['definitions'][0]['synonyms']
             context = {
                 'form':form,
                 'input':text,
@@ -189,11 +190,30 @@ def dictionary(request):
                 'form':form,
                 'input':''
             }
-        return render(request, "dashboard/dictionary.html",context)
+        return render(request,"dashboard/dictionary.html",context)
     else:
         form = DashboardForm()
         context = {'form':form}
-    return render(request, "dashboard/dictionary.html",context)
+    return render(request,"dashboard/dictionary.html",context)
+
+def wiki(request):
+    if request.method == 'POST':
+        text = request.POST['text']
+        form = DashboardForm(request.POST)
+        search = wikipedia.page(text)
+        context = {
+            'form':form,
+            'title':search.title,
+            'link':search.url,
+            'details':search.summary
+        }
+        return render(request,"dashboard/wikipedia.html",context)
+    else:
+        form = DashboardForm()
+        context = {
+            'form':form
+        }
+    return render(request,"dashboard/wikipedia.html",context)
 
 def register(request):
     if request.method == 'POST':
@@ -217,6 +237,7 @@ def profile(request):
         homework_done = True
     else:
         homework_done = False
+        
     if len(todos) == 0:
         todos_done = True
     else:
@@ -229,4 +250,4 @@ def profile(request):
         'todos_done' : todos_done
     }
         
-    return render(request, "dashboard/profile.html")
+    return render(request, "dashboard/profile.html", context)

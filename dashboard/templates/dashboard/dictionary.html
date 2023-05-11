@@ -37,19 +37,19 @@
                 <h6>{{ phonetics }}</h6>
                 <audio id="player" src="{{ audio }}"></audio>
                 <div>
-                    <a onclick="document.getElementbyId('player').play()" <i class="bi bi-volume-up-fill"></i></a>
+                    <a onclick="document.getElementById('player').play()"><i class="bi bi-volume-up-fill"></i></a>
                 </div>
             </div>
     
             <hr class="p-0 m-0">
     
             <p class="float-left">
-                <h4>Definition: {{ definition }}</h4>
-                <h4>Example: {{ example }}</h4>
+                <h6>Definition: {{ definition }}</h6>
+                <h6>Example: {{ example }}</h6>
             </p>
             Synonyms:
             {% for synonym in synonyms %}
-                {{ synonym  }}
+                {{ synonym }}
             {% endfor %}
             <hr>
         </div>
