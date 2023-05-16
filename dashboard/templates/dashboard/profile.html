@@ -21,11 +21,11 @@
 	</nav>
 
     <!-- Profile starts here -->
-    <section >
+    <section style="padding: 10%;">
 
         <!-- table for the to do list-->
         {% if not todos_done %}
-        <div class="container" style="padding: 10%;">
+        <div class="container">
             <h2 class="text-center">Due To Do Tasks</h2>
             <table class="table">
                 <thead>
@@ -120,11 +120,4 @@
         </div>
     </section>
 
-    <!-- footer starts -->
-	<footer class="bg-dark p-2 text-center">
-		<div class="container">
-			<p class="text-white">All Right Reserved By @DJANGO TEAM 2022-2023</p>
-		</div>
-	</footer>
-	<!-- footer ends -->
     {% endblock content %}

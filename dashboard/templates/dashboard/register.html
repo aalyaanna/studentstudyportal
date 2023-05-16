@@ -1,5 +1,5 @@
 
-{% extends 'dashboard/home.html' %}
+{% extends 'dashboard/login.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content  %}
@@ -18,24 +18,37 @@
 	</nav>
 
     <!--Signup form-->
-    <div class="container mt-5 p-5">
-      <form method="POST">
-        {% csrf_token %}
-        <fieldset class="form-group">
-          <legend class="border-bottom mb-4 mt-5">Sign Up</legend>
-          {{ form | crispy }}
-        </fieldset>
-        <div class="form-group">
-          <div class="d-grid gap-2 col-3 mx-auto mb-3 mt-3">
-            <button class="btn btn-secondary text-white" type="submit">
-              SignUp
-            </button>
-          </div>
+    <!-- Main Container -->
+    <div class="container d-flex justify-content-center align-items-center min-vh-100 pt-5 mt-5 mb-5">
+      <!-- Login Container-->
+         <div class="row border rounded-5 p-3 bg-white shadow box-login">
+      <!--Left Box -->
+         <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box" style="background: #F2F3F4;">
+             <div class="featured-image mb-3">
+              <img src="https://media.tenor.com/rtvoz_mxToQAAAAd/busy-working.gif" class="img-fluid" style="width: 350px;">
+             </div>
+             <p class="text-dark fs-2" style="font-weight: 600;">Mag aral ka teh</p>
+             <small class="text-dark text-wrap text-center" style="width: 17rem;">Sumali ka na sa STUDYERA para magaral, babagsak ka sa finals nyan.</small>
+         </div> 
+      <!-- Right Box -->
+      <div class="col-md-6 right-box">
+            <div class="row align-items-center">
+                  <div class="header-text mb-4">
+                       <h2>Hello, studyante</h2>
+                       <p>Sali ka na sa STUDYERA.</p>
+                  </div>
+                  <form method="POST">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div class="d-grid gap-2 col-8 mx-auto input-field text-center pt-4">
+                      <button type="submit" class="btn btn-dark">Signup</button>
+                  </div>
+                  <div class="pt-4 text-center">
+                      <span>Already a user? <a class="link-dark" href="{% url 'login' %}">Login</a></span>
+                  </div>
+                  </form>
+            </div>
+         </div> 
         </div>
-      </form>
-      <div class="d-grid gap-2 col-8 mx-auto mb-3 mt-3">
-        <p class="text-secondary text-center">Already a user? <a href="{% url 'login' %}" class="link-secondary">Login</a></p>
       </div>
-    </div>
-
 {% endblock content %}
