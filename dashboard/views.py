@@ -124,6 +124,7 @@ def update_todo(request,pk=None):
     todo.save()
     return redirect('todo')
 
+
 def delete_todo(request,pk=None):
     Todo.objects.get(id=pk).delete()
     return redirect("todo")
